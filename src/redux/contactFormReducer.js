@@ -3,8 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   contacts: [],
   filter: '',
-  name: '',
-  number: '',
 };
 
 const contactFormSlice = createSlice({
@@ -23,15 +21,9 @@ const contactFormSlice = createSlice({
     setFilter: (state, action) => {
       state.filter = action.payload;
     },
-    setName: (state, action) => {
-      state.name = action.payload;
-    },
-    setNumber: (state, action) => {
-      state.number = action.payload;
-    },
   },
 });
 
-export const { addContacts, setFilter, setName, setNumber, deleteContact } =
+export const { addContacts, setFilter, deleteContact } =
   contactFormSlice.actions;
 export const contactFormReducer = contactFormSlice.reducer;

@@ -1,10 +1,15 @@
 import styles from './Filter.module.css';
 import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
+import { useDispatch, useSelector } from 'react-redux';
+import { setFilter } from 'redux/contactFormReducer';
+import { selectFilter } from 'redux/selectors';
 
 const filterId = nanoid();
 
-export const Filter = ({ value, onChange }) => {
+export const Filter = () => {
+  const filter = useSelector(selectFilter);
+  const dispatch = useDispatch();
+
   return (
     <div className={styles.filterWrap}>
       <label htmlFor={filterId} className={styles.filterLabel}>
@@ -14,15 +19,12 @@ export const Filter = ({ value, onChange }) => {
         className={styles.filterInput}
         type="text"
         name="filter"
-        value={value}
+        value={filter}
         id={filterId}
-        onChange={onChange}
+        onChange={({ target }) => {
+          dispatch(setFilter(target.value));
+        }}
       />
     </div>
   );
-};
-
-Filter.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
